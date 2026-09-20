@@ -22,10 +22,10 @@
 //
 // Metatron Dynamics, Inc. V7.
 
-use std::collections::HashMap;
+
 use crate::locus::is_declared;
 use crate::observation::{R0Relation, R1Structure};
-use crate::history::{EdgeHistory, RelationalMemory};
+use crate::history::RelationalMemory;
 
 // ── Boundary token ────────────────────────────────────────────────────────
 

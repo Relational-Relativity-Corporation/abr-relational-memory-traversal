@@ -3,7 +3,7 @@
   "checkpoints": [
     {
       "after_observation": 3,
-      "observation_gap_for_runs": 0,
+      "observation_gap_for_runs": 3,
       "r2_from_g_space": [
         "\"g b\" count=1",
         "\"g d\" count=1",
@@ -11,11 +11,21 @@
         "\"g p\" count=1",
         "\"g r\" count=8",
         "\"g s\" count=1"
+      ],
+      "runs_observation_steps": [
+        7,
+        23,
+        50,
+        67,
+        96,
+        126,
+        150,
+        183
       ]
     },
     {
       "after_observation": 6,
-      "observation_gap_for_runs": 0,
+      "observation_gap_for_runs": 6,
       "r2_from_g_space": [
         "\"g b\" count=2",
         "\"g d\" count=1",
@@ -24,28 +34,71 @@
         "\"g p\" count=1",
         "\"g r\" count=8",
         "\"g s\" count=1"
+      ],
+      "runs_observation_steps": [
+        7,
+        23,
+        50,
+        67,
+        96,
+        126,
+        150,
+        183
       ]
     },
     {
       "after_observation": 9,
-      "observation_gap_for_runs": 0,
+      "observation_gap_for_runs": 9,
       "r2_from_g_space": [
         "\"g b\" count=2",
         "\"g d\" count=1",
         "\"g e\" count=3",
         "\"g j\" count=1",
         "\"g p\" count=1",
-        "\"g r\" count=9",
+        "\"g r\" count=8",
         "\"g s\" count=2"
+      ],
+      "runs_observation_steps": [
+        7,
+        23,
+        50,
+        67,
+        96,
+        126,
+        150,
+        183
+      ]
+    },
+    {
+      "after_observation": 10,
+      "observation_gap_for_runs": 10,
+      "r2_from_g_space": [
+        "\"g b\" count=3",
+        "\"g d\" count=1",
+        "\"g e\" count=3",
+        "\"g j\" count=1",
+        "\"g p\" count=1",
+        "\"g r\" count=8",
+        "\"g s\" count=2"
+      ],
+      "runs_observation_steps": [
+        7,
+        23,
+        50,
+        67,
+        96,
+        126,
+        150,
+        183
       ]
     }
   ],
   "governing_question": "Does relational resolution distinguish immediate from persistent experience without scalar compression?",
-  "overall_disposition": "V0.3.0 PASS — Scoped relational memory confirmed. R² distinguishes immediate from persistent experience. LTD structural change observed.",
+  "overall_disposition": "V0.3.0 PASS — Scoped relational memory confirmed. X*X*X boundary token declared and verified. R² distinguishes immediate from persistent experience without scalar encoding. LTD: NOT YET OBSERVED — V0.3.1 declared for clean experiment. Relational Evolution Frame Declaration issued for Verifier review.",
   "q1_scope_separation": true,
   "q4_finding": "OBSERVED — R² resolution distinguishes long_term from conversation scope without scalar encoding. The same R¹ structure (g,SPACE) has different relational futures in each scope.",
   "q4_r2_diverges": true,
-  "q5_finding": "OBSERVED — R² structure changed across observation gap. Relational structure is sensitive to sustained absence of activation. Forgetting gradient is derivable from observation sequence.",
+  "q5_finding": "PARTIAL — R² structure changed as new associations accumulated (barks, sleeps, plays). The runs association did not weaken. What changed is the relative density of the runs path among new additions. Full LTD observation requires longer sustained absence and measurement of whether runs ceases to participate in traversal from the current relational frontier. V0.3.1 declared for clean LTD experiment.",
   "q5_r2_changed": true,
   "verifier_gates_all_pass": true,
   "version": "V0.3.0"

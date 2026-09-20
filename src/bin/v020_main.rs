@@ -489,10 +489,10 @@ fn main() {
     println!();
 
     // Depth-2: all paths of length 2 from (o,g)
-    let ma_d2_paths: Vec<String> = r1_ma.paths.iter()
+    let _ma_d2_paths: Vec<String> = r1_ma.paths.iter()
         .filter(|p| p.edges.len() >= 3)
         .map(|p| path_str(p)).collect();
-    let mb_d2_paths: Vec<String> = r1_mb.paths.iter()
+    let _mb_d2_paths: Vec<String> = r1_mb.paths.iter()
         .filter(|p| p.edges.len() >= 3)
         .map(|p| path_str(p)).collect();
 

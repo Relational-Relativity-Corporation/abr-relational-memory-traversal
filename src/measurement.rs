@@ -15,7 +15,7 @@
 // Metatron Dynamics, Inc. V7.
 
 use crate::history::RelationalMemory;
-use crate::traversal::{traverse_r0, traverse_r1, query_q6, Q6Result};
+use crate::traversal::{traverse_r1, query_q6, Q6Result};
 use serde::Serialize;
 
 #[derive(Debug, Serialize)]

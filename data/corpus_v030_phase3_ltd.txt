@@ -6,4 +6,5 @@ dogs sleep and sleep
 the dog barks at night
 a sleepy dog sleeps well
 dogs play and bark
-the dog runs
+dogs jump and play
+the dog barks again

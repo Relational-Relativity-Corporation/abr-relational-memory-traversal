@@ -25,11 +25,7 @@
 //
 // Metatron Dynamics, Inc. V7.
 
-use abr_relational_memory_traversal::{
-    scoped_memory::{ScopedRelationalMemory, BOUNDARY_TOKEN},
-    traversal::traverse_r1,
-};
-use serde::Serialize;
+use abr_relational_memory_traversal::scoped_memory::{ScopedRelationalMemory, BOUNDARY_TOKEN};
 use std::collections::HashSet;
 
 const CORPUS_PHASE1: &str = include_str!("../../data/corpus_v030_phase1.txt");
@@ -37,8 +33,7 @@ const CORPUS_PHASE2: &str = include_str!("../../data/corpus_v030_phase2.txt");
 const CORPUS_PHASE3_LTD: &str = include_str!("../../data/corpus_v030_phase3_ltd.txt");
 
 const C_OBSERVATION: &str = "dog";
-const DEPTH_LIMIT: usize = 4;
-const LTD_CHECKPOINT_INTERVAL: usize = 3;  // measure every N observations
+const LTD_CHECKPOINT_INTERVAL: usize = 3;
 
 fn main() {
     banner("abr-relational-memory-traversal V0.3.0");
@@ -227,7 +222,7 @@ fn main() {
                 .map(|h| h.observed_at_steps())
                 .unwrap_or_default();
 
-            let eats_steps = mem.long_term
+            let _eats_steps = mem.long_term
                 .get_r1([('g',' '),(' ','e')])
                 .map(|h| h.observed_at_steps())
                 .unwrap_or_default();
@@ -241,16 +236,19 @@ fn main() {
                 })
                 .collect();
 
+            // Observation gap: how many phase-3 observations since runs was last seen
+            // total_steps tracks absolute stream steps; gap measured in phase-3 lines
+            let gap = if runs_steps.last().cloned().unwrap_or(0) > 183 {
+                0  // runs was reactivated in phase-3
+            } else {
+                i + 1  // number of phase-3 observations with no runs activation
+            };
+
             let cp = CheckpointRecord {
                 after_observation: i + 1,
                 runs_observation_steps: runs_steps.clone(),
-                eats_observation_steps: eats_steps.clone(),
                 r2_from_g_space: lt_r2_after,
-                runs_last_step: runs_steps.last().cloned(),
-                current_step: mem.total_steps,
-                observation_gap_for_runs: mem.total_steps.saturating_sub(
-                    runs_steps.last().cloned().unwrap_or(0)
-                ),
+                observation_gap_for_runs: gap,
             };
 
             println!("  Checkpoint after {} phase-3 observations:", i + 1);
@@ -270,15 +268,31 @@ fn main() {
         a != b
     });
 
-    let q5_finding = if r2_changed {
-        "OBSERVED — R² structure changed across observation gap. \
-         Relational structure is sensitive to sustained absence of activation. \
-         Forgetting gradient is derivable from observation sequence."
+    // Q5 finding: r2_changed here means new structures ADDED (barks, sleeps, plays)
+    // not that the runs association weakened. LTD requires observing that a
+    // previously persistent association ceases to participate in traversal
+    // through sustained absence — not merely that new associations appear.
+    // The observation gap counter now correctly tracks phase-3 observations
+    // without runs activation.
+    let runs_reactivated = checkpoints.iter()
+        .any(|c| c.runs_observation_steps.len() > 8);
+
+    let q5_finding = if runs_reactivated {
+        "NOT OBSERVED — runs association was reactivated during phase-3 \
+         (corpus contained 'dog runs'). LTD requires sustained absence. \
+         Corpus corrected for next run."
+    } else if r2_changed {
+        "PARTIAL — R² structure changed as new associations accumulated \
+         (barks, sleeps, plays). The runs association did not weaken. \
+         What changed is the relative density of the runs path among \
+         new additions. Full LTD observation requires longer sustained \
+         absence and measurement of whether runs ceases to participate \
+         in traversal from the current relational frontier. \
+         V0.3.1 declared for clean LTD experiment."
     } else {
-        "NOT OBSERVED — R² structure unchanged across observation gap. \
-         The observation gap does not yet produce structural change. \
-         Scalar decay not yet demanded by observation. \
-         Continue accumulating observation gaps and re-measure."
+        "NOT OBSERVED — R² structure unchanged. \
+         Observation gap insufficient or corpus too small. \
+         V0.3.1 declared for clean LTD experiment."
     };
     println!("  Q5 finding: {}\n", q5_finding);
 
@@ -313,21 +327,20 @@ fn main() {
     println!();
 
     // ── Disposition ───────────────────────────────────────────────────────
-    let disposition = match (all_pass, q1_pass, r2_diverges, r2_changed) {
-        (true, true, true, true)  =>
+    let disposition = match (all_pass, q1_pass, r2_diverges) {
+        (true, true, true)  =>
             "V0.3.0 PASS — Scoped relational memory confirmed. \
-             R² distinguishes immediate from persistent experience. \
-             LTD structural change observed.",
-        (true, true, true, false) =>
-            "V0.3.0 PASS — Scoped relational memory confirmed. \
-             R² distinguishes immediate from persistent experience. \
-             LTD: NOT YET OBSERVED — observation gap insufficient.",
-        (true, true, false, _)    =>
+             X*X*X boundary token declared and verified. \
+             R² distinguishes immediate from persistent experience \
+             without scalar encoding. \
+             LTD: NOT YET OBSERVED — V0.3.1 declared for clean experiment. \
+             Relational Evolution Frame Declaration issued for Verifier review.",
+        (true, true, false) =>
             "V0.3.0 HOLD — Association acquisition confirmed. \
              R² does not yet distinguish scopes. Expand corpus.",
-        (true, false, _, _)       =>
+        (true, false, _)    =>
             "V0.3.0 HOLD — Q1 scope separation not confirmed.",
-        (false, _, _, _)          =>
+        (false, _, _)       =>
             "V0.3.0 HOLD — gate failure.",
     };
 
@@ -344,6 +357,7 @@ fn main() {
         "q5_finding": q5_finding,
         "checkpoints": checkpoints.iter().map(|c| serde_json::json!({
             "after_observation": c.after_observation,
+            "runs_observation_steps": c.runs_observation_steps,
             "observation_gap_for_runs": c.observation_gap_for_runs,
             "r2_from_g_space": c.r2_from_g_space,
         })).collect::<Vec<_>>(),
@@ -364,10 +378,7 @@ fn main() {
 struct CheckpointRecord {
     after_observation: usize,
     runs_observation_steps: Vec<usize>,
-    eats_observation_steps: Vec<usize>,
     r2_from_g_space: Vec<String>,
-    runs_last_step: Option<usize>,
-    current_step: usize,
     observation_gap_for_runs: usize,
 }
 
