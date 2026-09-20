@@ -570,14 +570,19 @@ fn main() {
     let expression_differs = ma_paths_all != mb_paths_all;
     let q6_finding = match (expression_differs, depth2_diverges) {
         (true, true) =>
-            "OBSERVED — relational expression differs between M_A and M_B. \
-             Different training histories produced different relational progressions \
-             from the same current observation.",
+            "History-dependent relational progression set: OBSERVED. \
+             The set of relational progressions available from C differs between \
+             M_A and M_B. Different training histories produced different relational \
+             continuation structures from the same current observation. \
+             Singular relational expression: NOT YET OBSERVED — \
+             no single progression has arisen; all available progressions are \
+             enumerated. What distinguishes one expressed progression from several \
+             historically available progressions is the V0.3.0 problem.",
         (false, true) =>
-            "PARTIAL — depth-2 structure differs but full path expression \
-             is identical. Expression mechanism not yet producing distinguished output.",
+            "History-dependent relational progression set: PARTIAL — \
+             depth-2 structure differs but full path enumeration is identical.",
         (_, false) =>
-            "NOT OBSERVED — expression does not differ. \
+            "NOT OBSERVED — progression sets do not differ. \
              Corpus differentiation insufficient or domain too small.",
     };
 
@@ -642,10 +647,15 @@ fn main() {
 
     // ── Disposition ───────────────────────────────────────────────────────
     let disposition = match (all_pass, depth2_diverges, expression_differs) {
-        (true, true, true)  => "V0.2.0 PASS — association training and expression confirmed",
-        (true, true, false) => "V0.2.0 HOLD — association acquired, expression not yet distinguished",
-        (true, false, _)    => "V0.2.0 NOT OBSERVED — corpus differentiation insufficient",
-        (false, _, _)       => "V0.2.0 HOLD — gate failure",
+        (true, true, true)  =>
+            "V0.2.0 PASS — Association Training and History-Dependent Relational Continuation. \
+             Singular relational expression: NOT YET OBSERVED.",
+        (true, true, false) =>
+            "V0.2.0 HOLD — association acquired, progression sets not yet distinguished",
+        (true, false, _)    =>
+            "V0.2.0 NOT OBSERVED — corpus differentiation insufficient",
+        (false, _, _)       =>
+            "V0.2.0 HOLD — gate failure",
     };
 
     // ── Write run record ──────────────────────────────────────────────────

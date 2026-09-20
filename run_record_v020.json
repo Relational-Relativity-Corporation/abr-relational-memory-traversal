@@ -387,8 +387,8 @@
       "(g,SPACE)→(SPACE,r) \"g r\""
     ],
     "depth2_structures_only_in_mb": [
-      "(g,SPACE)→(SPACE,a) \"g a\"",
-      "(g,SPACE)→(SPACE,e) \"g e\""
+      "(g,SPACE)→(SPACE,e) \"g e\"",
+      "(g,SPACE)→(SPACE,a) \"g a\""
     ],
     "depth2_diverges": true,
     "finding": "OBSERVED — same C, identical depth-1, divergent depth-2. Relational history of shared structure (g,SPACE) differs between M_A and M_B."
@@ -449,7 +449,7 @@
       "ogs we"
     ],
     "expression_differs": true,
-    "finding": "OBSERVED — relational expression differs between M_A and M_B. Different training histories produced different relational progressions from the same current observation."
+    "finding": "History-dependent relational progression set: OBSERVED. The set of relational progressions available from C differs between M_A and M_B. Different training histories produced different relational continuation structures from the same current observation. Singular relational expression: NOT YET OBSERVED — no single progression has arisen; all available progressions are enumerated. What distinguishes one expressed progression from several historically available progressions is the V0.3.0 problem."
   },
   "verifier_gates": {
     "g1_cold_start_identical": true,
@@ -468,5 +468,5 @@
     "g14_no_reverse_traversal": true,
     "g15_json_run_record_produced": true
   },
-  "overall_disposition": "V0.2.0 PASS — association training and expression confirmed"
+  "overall_disposition": "V0.2.0 PASS — Association Training and History-Dependent Relational Continuation. Singular relational expression: NOT YET OBSERVED."
 }
