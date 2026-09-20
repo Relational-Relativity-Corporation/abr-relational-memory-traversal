@@ -16,3 +16,7 @@ serde_json = "1"
 [[bin]]
 name = "v020_main"
 path = "src/bin/v020_main.rs"
+
+[[bin]]
+name = "v030_main"
+path = "src/bin/v030_main.rs"

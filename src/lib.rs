@@ -15,3 +15,4 @@ pub mod observation;
 pub mod history;
 pub mod traversal;
 pub mod measurement;
+pub mod scoped_memory;
