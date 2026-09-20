@@ -282,13 +282,16 @@ fn main() {
          (corpus contained 'dog runs'). LTD requires sustained absence. \
          Corpus corrected for next run."
     } else if r2_changed {
-        "PARTIAL — R² structure changed as new associations accumulated \
-         (barks, sleeps, plays). The runs association did not weaken. \
-         What changed is the relative density of the runs path among \
-         new additions. Full LTD observation requires longer sustained \
-         absence and measurement of whether runs ceases to participate \
-         in traversal from the current relational frontier. \
-         V0.3.1 declared for clean LTD experiment."
+        "LTD: NOT OBSERVED — RUNS history at phase-3 end is identical \
+         to RUNS history at phase-3 start (8 observations throughout). \
+         Sustained non-recurrence does not imply change in established \
+         association under the current memory representation. \
+         The R² neighborhood changed because new associations accumulated \
+         (barks, sleeps, plays); the RUNS association itself did not weaken. \
+         Finding: sustained_non_recurrence ⇏ change_in_established_association. \
+         This is a legitimate architectural observation, not a failure. \
+         The Relational Evolution Frame Declaration addresses what variable \
+         structure is needed before LTD can be properly observed."
     } else {
         "NOT OBSERVED — R² structure unchanged. \
          Observation gap insufficient or corpus too small. \
