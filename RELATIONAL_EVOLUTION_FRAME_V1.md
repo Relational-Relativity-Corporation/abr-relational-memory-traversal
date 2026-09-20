@@ -471,3 +471,196 @@ V0.3.1 (D only). They must be resolved before V0.5.0.
 ---
 
 Metatron Dynamics, Inc. V7.
+
+---
+
+## 15. Declared non-participation as active input
+
+This section was added after V0.3.0 PASS/FREEZE based on the
+following architectural observation:
+
+> In biological neural systems, the forward relational evolution
+> of a cell reads non-activation as an active input — not as
+> silence, not as a gap in the record, but as a positive
+> relational signal that produces measurable change in the
+> cell's relational state.
+
+V0.3.0 confirmed that the current architecture does not have
+this property:
+
+```
+sustained_non_recurrence ⇏ change_in_established_association
+```
+
+This is not a failure. It is a precise measurement of rigidity
+in the current representation. The system responds to activation
+but not to non-participation. This section declares what is
+needed to introduce relational flexibility.
+
+### 15.1 Declared sets at each observation step
+
+For each observation O_t, three sets are now declared:
+
+```
+A_t = {e : edge e activated at step t}
+      The active set — what fired
+
+V_t = {e : edge e present in relational memory AND
+            reachable from the current relational frontier}
+      The available set — what was reachable but may not have fired
+
+N_t = V_t \ A_t
+      The non-participating set — what was available but did not fire
+      = declared non-participation
+      = active relational input
+      NOT a gap in the record
+      NOT inferred from absence
+      DERIVED from the declared relational state at each step
+```
+
+N_t is not passive. It is derived from the observable relational
+state — V_t is computable from the current relational memory,
+A_t is computable from the current observation. Their difference
+is N_t. This derivation is traceable through M at every step.
+
+### 15.2 Relational flexibility — declared architectural property
+
+```
+RELATIONAL FLEXIBILITY
+
+Definition:
+  The capacity of the relational system to modulate current
+  relational participation in response to the complete
+  observed input — including declared non-participation N_t —
+  while preserving full historical provenance.
+
+Formal distinction:
+
+  Rigid system (current architecture, V0.1.1 through V0.3.0):
+    ΔX_t = f(A_t) only
+    N_t has no effect on relational state
+    sustained non-recurrence ⇏ change in participation
+
+  Flexible system (declared here, to be built):
+    ΔX_t = f(A_t, N_t)
+    N_t is an active input to the relational evolution operators
+    sustained N_t membership → change in current participation
+
+Distinction from forgetting:
+  Forgetting implies loss of historical provenance.
+  Relational flexibility implies change in current participation.
+  The historical record is NEVER altered.
+  What changes is which structures are currently active
+  at the relational frontier.
+
+Biological basis:
+  Derived from the property by which forward relational
+  evolution in biological cells reads non-activation as
+  an active input, producing measurable change in
+  relational state — neural flexibility.
+  This is the architectural property being declared.
+  Whether the computational instantiation warrants
+  biological labels (LTD, synaptic depression) is
+  determined by observation after measurement — not before.
+
+Relationship to the V0.3.0 null result:
+  V0.3.0 confirmed the current system is rigid.
+  Relational flexibility is what gets declared and
+  built next. The null result is the baseline.
+```
+
+### 15.3 LTD-like evolution — now statable precisely
+
+With N_t declared as an active input, LTD-like evolution
+is observable when:
+
+```
+e ∈ N_t for k consecutive observation steps
+where k is a declared threshold (Origin declaration,
+not optimized, not inferred — a declared integer)
+```
+
+The result is change in relational participation — specifically,
+edge e recedes from the active relational frontier. Its
+historical provenance is intact. It is historically observed,
+and currently persistent in the record, but no longer
+currently participating in traversal from the present
+relational frontier.
+
+This resolves the three-way distinction declared by the
+Verifier after V0.2.0:
+
+```
+historically observed ≠ currently persistent ≠ currently participating
+```
+
+Relational flexibility is the property that governs the third
+term — current participation — without disturbing the first two.
+
+### 15.4 Why this is fundamental to simulating human experience
+
+Every other approach to human-like language response encodes
+the description of human experience — sentiment scores,
+emotion classifiers, attention weights over semantic embeddings.
+They describe the output of human experience and try to
+reproduce it directly.
+
+This architecture is different. It instantiates the mechanism
+by which experience becomes structured — the same forward
+relational evolution that biological systems use, expressed
+in mathematics that can run.
+
+Relational flexibility is not a simulation of how humans feel.
+It is the property that makes a system's current state
+responsive to the present moment rather than frozen in its
+accumulated past. That responsiveness is what makes human
+language feel alive:
+
+  Not that humans have access to large databases.
+  But that what they say next is genuinely shaped by
+  what is happening now — including what is not being said,
+  what is not being activated, what is receding from the
+  present relational frontier.
+
+The N_t declaration is small in code.
+It is fundamental in architecture.
+
+### 15.5 What this adds to the build sequence
+
+```
+V0.3.0  PASS/FREEZE  Rigidity confirmed — N_t not yet declared
+                     sustained_non_recurrence ⇏ participation change
+
+This declaration:
+  N_t = V_t \ A_t as active input declared
+  Relational flexibility declared as named property
+  k (non-participation threshold) to be declared by Origin
+    before V0.3.1 code is written
+
+V0.3.1  NEXT (pending Verifier confirmation of this frame):
+  First flexibility experiment
+  Declare N_t at each observation step
+  Observe whether current participation changes under
+  sustained non-activation with k declared
+  No scalar decay. No deletion. Provenance intact.
+  NOT OBSERVED remains admissible.
+```
+
+### 15.6 Open question added — OQ-REF-5
+
+```
+OQ-REF-5 — Non-participation threshold k
+  What is the admissible form of the declared threshold k?
+  Options:
+  (a) Absolute count: e ∈ N_t for k consecutive steps
+  (b) Relative: k expressed as a ratio of V_t size
+      (how many available structures were non-participating)
+  (c) Relational: k derived from the R¹ depth at which
+      e is reachable from the current frontier
+  The most admissible form is one derivable from the
+  declared relational state — not an arbitrary integer.
+  Option (c) is the most consistent with the architecture.
+  Origin declaration required before V0.3.1 code.
+```
+
+Metatron Dynamics, Inc. V7.
